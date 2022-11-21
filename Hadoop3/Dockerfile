@@ -4,8 +4,8 @@ RUN apt-get update -y \
         sudo \
         curl \
         ssh \
-        python3 \
     && apt-get clean
+RUN apt install python3.9 -y
 RUN useradd -m hduser && echo "hduser:supergroup" | chpasswd && adduser hduser sudo && echo "hduser     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && cd /usr/bin/ && sudo ln -s python3 python
 COPY ssh_config /etc/ssh/ssh_config
 
