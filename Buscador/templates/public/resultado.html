@@ -1,7 +1,7 @@
 {% extends 'public/index.html' %}
 
 {% block body %}
-    <h4 class="text-center">Resultado <hr></h4>
+    <h4 class="text-center">Resultado para la busqueda "{{ busqueda }}"<hr></h4>
     {% if (resultado) %}
     <section>
         {% for i in resultado %} 

@@ -13,17 +13,22 @@ def inicio():
 @app.route('/Busqueda', methods=['GET','POST'])
 def Busqueda():
     if request.method == "POST":
-        resultado = ''
+        resultado = []
         search = ''
         search = request.form['buscar'].lower()
+        print('busqueda: ',search.split())
         if search != '':
             try:
-                resultado = list(json_object[search].keys())
+                for busqueda in search.split():
+                    resultadoaux = list(json_object[busqueda].keys())
+                    for item in resultadoaux:
+                        resultado.append(item)
             except:
                 print()
+            print('resultado: ', resultado)
             return render_template('public/resultado.html', resultado = resultado, busqueda = search)
 
-    return redirect(url_for('inicio'))
+    
 
 
 @app.route('/Archivo/<archivo>', methods=['GET'])
