@@ -5,7 +5,12 @@ RUN apt-get update -y \
         curl \
         ssh \
     && apt-get clean
-RUN apt install python3.9 -y
+RUN apt install python3.9 python3-pip -y
+RUN pip install flask
+
+CMD [ "python3.9", "-m" , "flask", "run", "--host=0.0.0.0"]
+
+# RUN flask --app /home/hduser/examples/buscadorChoro.py --debug run -p 5000
 RUN useradd -m hduser && echo "hduser:supergroup" | chpasswd && adduser hduser sudo && echo "hduser     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && cd /usr/bin/ && sudo ln -s python3 python
 COPY ssh_config /etc/ssh/ssh_config
 
@@ -37,6 +42,7 @@ COPY docker-entrypoint.sh $HADOOP_HOME/etc/hadoop/
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 ADD examples/ examples/ 
+
 
 EXPOSE 50070 50075 50010 50020 50090 8020 9000 9864 9870 10020 19888 8088 8030 8031 8032 8033 8040 8042 22
 

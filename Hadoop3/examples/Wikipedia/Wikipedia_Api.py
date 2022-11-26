@@ -22,11 +22,12 @@ for entrada in entradas:
 
     n_page = list(req['query']['pages'].keys())[0]
     texto = req['query']['pages'][n_page]['extract']
-    texto = json.dumps(texto) + "<end>"
+    texto = '{}<splittername>{}'.format(i, json.dumps(texto))
+    
     if i <= 5:
-        with open('./Hadoop/Carpeta1/Archivo'+str(i)+'.txt', 'w') as f:
+        with open('./Wikipedia/Carpeta1/Archivo'+str(i)+'.txt', 'w') as f:
             f.write(texto)
     else:
-        with open('./Hadoop/Carpeta2/Archivo'+str(i)+'.txt', 'w') as f:
+        with open('./Wikipedia/Carpeta2/Archivo'+str(i)+'.txt', 'w') as f:
             f.write(texto)
     i = i + 1

@@ -6,11 +6,15 @@ import re
 
 for line in sys.stdin:
     docs = line.lower()
+    arr = []
+
     for char in [",", ".", '"', "'", "(", ")", "\\", ";", ":", "$1", "$", "&"]:
         docs = docs.replace(char, '')
 
-    docs = docs.split('<end>')[0:-1]
+    name, docs = docs.split('<splittername>')
+    
+    for word in docs.split():
+        arr.append('{}\t{}\t{}'.format(word, name, 1))
 
-    for i,words in enumerate(docs):
-        for word in words.split():
-            print('{}\t{}\t{}'.format(word, i+1, 1))
+    for i in sorted(arr):
+        print(i)
