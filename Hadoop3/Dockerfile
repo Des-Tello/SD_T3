@@ -8,8 +8,6 @@ RUN apt-get update -y \
 RUN apt install python3.9 python3-pip -y
 RUN pip install flask
 
-CMD [ "python3.9", "-m" , "flask", "run", "--host=0.0.0.0"]
-
 # RUN flask --app /home/hduser/examples/buscadorChoro.py --debug run -p 5000
 RUN useradd -m hduser && echo "hduser:supergroup" | chpasswd && adduser hduser sudo && echo "hduser     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && cd /usr/bin/ && sudo ln -s python3 python
 COPY ssh_config /etc/ssh/ssh_config
